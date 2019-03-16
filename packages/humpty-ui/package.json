@@ -1,0 +1,173 @@
+{
+	"name": "humpty-ui",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"dev": "next",
+		"build": "next build",
+		"start": "cross-env AWS_PROFILE=lodocloud IN_LAMBDA=false NODE_ENV=development API_ENV=local nodemon ./src/server/index.js --exec babel-node --presets @babel/preset-env"
+	},
+	"dependencies": {
+		"@material-ui/core": "latest",
+		"@uppy/core": "^0.30.2",
+		"@uppy/react": "^0.30.2",
+		"beaver-logger": "^4.0.9",
+		"compression": "^1.7.3",
+		"connect-dynamodb": "^2.0.3",
+		"cors": "^2.8.5",
+		"deep-object-diff": "^1.1.0",
+		"express": "^4.16.4",
+		"express-session": "^1.15.6",
+		"got": "^9.6.0",
+		"immutable": "^4.0.0-rc.12",
+		"js-yaml": "^3.12.2",
+		"json-pointer": "^0.6.0",
+		"jss": "latest",
+		"lusca": "^1.6.1",
+		"luxon": "^1.11.4",
+		"next": "latest",
+		"next-redux-wrapper": "^3.0.0-alpha.2",
+		"passport": "^0.4.0",
+		"passport-auth0": "^1.1.0",
+		"prop-types": "latest",
+		"react": "latest",
+		"react-dom": "latest",
+		"react-jss": "latest",
+		"redux": "^4.0.1",
+		"redux-devtools-extension": "^2.13.8",
+		"redux-observable": "^1.0.0",
+		"rxjs": "^6.4.0",
+		"styled-jsx": "^3.2.1"
+	},
+	"author": "",
+	"license": "ISC",
+	"xo": {
+		"parser": "babel-eslint",
+		"parserOptions": {
+			"ecmaVersion": 6,
+			"sourceType": "module",
+			"ecmaFeatures": {
+				"jsx": true,
+				"generators": true,
+				"experimentalObjectRestSpread": true
+			}
+		},
+		"prettier": true,
+		"plugins": [
+			"jsx-a11y",
+			"react"
+		],
+		"globals": [
+			"it",
+			"describe",
+			"beforeEach",
+			"afterEach",
+			"context",
+			"jest",
+			"test",
+			"expect",
+			"window",
+			"document",
+			"location",
+			"fetch"
+		],
+		"rules": {
+			"unicorn/filename-case": 0,
+			"camelcase": [
+				"warn",
+				{
+					"properties": "always"
+				}
+			],
+			"import/no-named-as-default": 0,
+			"no-use-extend-native/no-use-extend-native": 0,
+			"import/no-unassigned-import": 0,
+			"prefer-destructuring": 0,
+			"linebreak-style": 0,
+			"operator-linebreak": 0,
+			"unicorn/catch-error-name": "warn",
+			"radix": "warn",
+			"no-negated-condition": "warn",
+			"no-unused-vars": "warn",
+			"prefer-const": "warn",
+			"import/order": "warn",
+			"new-cap": "warn",
+			"no-useless-concat": "warn",
+			"no-mixed-spaces-and-tabs": "warn",
+			"array-callback-return": "warn",
+			"one-var": "warn",
+			"no-eq-null": "warn",
+			"eqeqeq": "warn",
+			"no-lonely-if": "warn",
+			"no-throw-literal": "warn",
+			"capitalized-comments": 0,
+			"no-template-curly-in-string": 0,
+			"react/forbid-foreign-prop-types": [
+				"warn",
+				{
+					"allowInPropTypes": true
+				}
+			],
+			"react/jsx-no-comment-textnodes": "warn",
+			"react/jsx-no-duplicate-props": [
+				"warn",
+				{
+					"ignoreCase": true
+				}
+			],
+			"react/jsx-no-target-blank": "warn",
+			"react/jsx-no-undef": "error",
+			"react/jsx-pascal-case": [
+				"warn",
+				{
+					"allowAllCaps": true,
+					"ignore": []
+				}
+			],
+			"react/jsx-uses-react": "warn",
+			"react/jsx-uses-vars": "warn",
+			"react/no-danger-with-children": "warn",
+			"react/no-deprecated": "warn",
+			"react/no-direct-mutation-state": "warn",
+			"react/no-is-mounted": "warn",
+			"react/react-in-jsx-scope": "error",
+			"react/require-render-return": "error",
+			"react/style-prop-object": "warn",
+			"jsx-a11y/accessible-emoji": "warn",
+			"jsx-a11y/alt-text": "warn",
+			"jsx-a11y/anchor-has-content": "warn",
+			"jsx-a11y/anchor-is-valid": [
+				"warn",
+				{
+					"aspects": [
+						"noHref",
+						"invalidHref"
+					]
+				}
+			],
+			"jsx-a11y/aria-activedescendant-has-tabindex": "warn",
+			"jsx-a11y/aria-props": "warn",
+			"jsx-a11y/aria-proptypes": "warn",
+			"jsx-a11y/aria-role": "warn",
+			"jsx-a11y/aria-unsupported-elements": "warn",
+			"jsx-a11y/heading-has-content": "warn",
+			"jsx-a11y/iframe-has-title": "warn",
+			"jsx-a11y/img-redundant-alt": "warn",
+			"jsx-a11y/no-access-key": "warn",
+			"jsx-a11y/no-distracting-elements": "warn",
+			"jsx-a11y/no-redundant-roles": "warn",
+			"jsx-a11y/role-has-required-aria-props": "warn",
+			"jsx-a11y/role-supports-aria-props": "warn",
+			"jsx-a11y/scope": "warn"
+		}
+	},
+	"devDependencies": {
+		"aws-sdk": "^2.417.0",
+		"babel-eslint": "^10.0.1",
+		"cross-env": "^5.2.0",
+		"eslint-plugin-jsx-a11y": "^6.2.0",
+		"eslint-plugin-react": "^7.12.4",
+		"xo": "^0.24.0"
+	}
+}

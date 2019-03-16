@@ -1,0 +1,86 @@
+{
+	"name": "humpty-api",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "cross-env SLS_DEBUG=* AWS_PROFILE=lodo-perm serverless offline start",
+		"invoke-split": "cross-env AWS_PROFILE=lodo-perm serverless invoke local --function splitFile --path s3-sample.json",
+		"serverless:package:dev": "serverless package",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@babel/core": "^7.3.4",
+		"@babel/preset-env": "^7.3.4",
+		"archiver": "^3.0.0",
+		"aws-sdk": "^2.418.0",
+		"babel-loader": "^8.0.5",
+		"copy-webpack-plugin": "^5.0.0",
+		"cross-env": "^5.2.0",
+		"hummus": "^1.0.95",
+		"hummus-recipe": "^1.8.3",
+		"jszip": "^3.2.0",
+		"serverless": "^1.38.0",
+		"serverless-offline": "^4.8.1",
+		"serverless-pseudo-parameters": "^2.4.0",
+		"serverless-s3-local": "^0.3.23",
+		"serverless-step-functions": "^1.13.0",
+		"serverless-step-functions-offline": "^2.1.2",
+		"serverless-webpack": "^5.2.0",
+		"webpack": "^4.2.0",
+		"webpack-node-externals": "^1.7.2",
+		"xo": "^0.24.0"
+	},
+	"xo": {
+		"prettier": true,
+		"globals": [
+			"it",
+			"describe",
+			"beforeEach",
+			"afterEach",
+			"context",
+			"test",
+			"jest",
+			"expect"
+		],
+		"rules": {
+			"unicorn/filename-case": [
+				"warn",
+				{
+					"case": "kebabCase"
+				}
+			],
+			"camelcase": [
+				"warn",
+				{
+					"properties": "always"
+				}
+			],
+			"linebreak-style": 0,
+			"operator-linebreak": 0,
+			"unicorn/catch-error-name": "warn",
+			"radix": "warn",
+			"no-negated-condition": "warn",
+			"no-unused-vars": "warn",
+			"prefer-const": "warn",
+			"import/order": "warn",
+			"new-cap": "warn",
+			"no-useless-concat": "warn",
+			"no-mixed-spaces-and-tabs": "warn",
+			"array-callback-return": "warn",
+			"one-var": "warn",
+			"no-eq-null": "warn",
+			"eqeqeq": "warn",
+			"no-lonely-if": "warn",
+			"no-throw-literal": "warn",
+			"capitalized-comments": 0
+		}
+	},
+	"dependencies": {
+		"gm": "^1.23.1",
+		"memory-streams": "^0.1.3",
+		"mktemp": "^0.4.0"
+	}
+}

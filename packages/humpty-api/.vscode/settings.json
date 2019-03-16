@@ -1,0 +1,6 @@
+{
+  "editor.formatOnSave": true,
+  "prettier.eslintIntegration": false,
+  "git.ignoreLimitWarning": true,
+  "xo.enable": true
+}

@@ -1,0 +1,137 @@
+service: humpty-api
+package:
+  individually: true
+provider:
+  name: aws
+  runtime: nodejs8.10
+  deploymentBucket: lodo-${self:provider.region}-serverless-deploys
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "states:StartExecution"
+      Resource:
+        - "*"
+    - Effect: Allow
+      Action:
+        - s3:*
+      Resource:
+        - "Fn::Join":
+            - ":"
+            - - "arn:aws:s3::"
+              - "*"
+
+plugins:
+  - serverless-webpack
+  - serverless-s3-local
+  - serverless-offline
+  - serverless-step-functions
+  - serverless-step-functions-offline
+  - serverless-pseudo-parameters
+
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules:
+      forceExclude:
+        - hummus-recipe
+        - hummus
+  serverless-offline:
+    port: 3278
+  stage: "${opt:stage, self:provider.stage}"
+  stepFunctionsOffline:
+    stepOne: splitFile
+    stepTwo: extractText
+  s3:
+    host: 0.0.0.0
+    port: 8001
+
+functions:
+  splitFile:
+    handler: src/handlers/split-file.handler
+    layers:
+      - { Ref: HummusLambdaLayer }
+  extractText:
+    handler: src/handlers/extract-text.handler
+  start:
+    handler: src/handlers/start-file-processing.handler
+    events:
+      - s3:
+          bucket: humptyUploads
+          event: s3:ObjectCreated:*
+    environment:
+      STATE_MACHINE_ARN: ${self:resources.Outputs.HumptyProcessFileStateMachine.Value}
+
+stepFunctions:
+  stateMachines:
+    humptyProcessFile:
+      name: HumptyProcessFileStateMachine
+      definition:
+        Comment: "Processes a file uploaded by a user"
+        StartAt: splitFile
+        States:
+          splitFile:
+            Type: Task
+            Resource: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:${self:service}-${self:custom.stage}-splitFile
+            Next: extractText
+          extractText:
+            Type: Task
+            Resource: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:${self:service}-${self:custom.stage}-extractText
+            End: true
+
+layers:
+  hummus:
+    path: src/layers/hummus
+
+resources:
+  Outputs:
+    HumptyProcessFileStateMachine:
+      Description: The ARN of the state machine
+      Value:
+        Ref: HumptyProcessFileStateMachine
+  Resources:
+    S3BucketHumptyUploads:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: lodo-${self:service}-uploads
+        CorsConfiguration:
+          CorsRules:
+            - AllowedOrigins:
+                - "*"
+              AllowedHeaders:
+                - "*"
+              AllowedMethods:
+                - GET
+                - PUT
+                - POST
+                - DELETE
+                - HEAD
+              MaxAge: 3000
+    S3BucketHumptyUserFiles:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: lodo-${self:service}-user-files
+        CorsConfiguration:
+          CorsRules:
+            - AllowedOrigins:
+                - "*"
+              AllowedHeaders:
+                - "*"
+              AllowedMethods:
+                - GET
+                - PUT
+                - POST
+                - DELETE
+                - HEAD
+              MaxAge: 3000
+    StartFileProcessingLambdaPermissionHumptyUploadsS3:
+      Type: "AWS::Lambda::Permission"
+      Properties:
+        FunctionName:
+          "Fn::GetAtt":
+            - StartLambdaFunction
+            - Arn
+        Principal: "s3.amazonaws.com"
+        Action: "lambda:InvokeFunction"
+        SourceAccount:
+          Ref: AWS::AccountId
+        SourceArn: "arn:aws:s3:::lodo-${self:service}-uploads"

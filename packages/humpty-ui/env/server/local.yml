@@ -1,0 +1,8 @@
+NODE_ENV: development
+API_ENV: local
+LOGGER_HOST: ""
+IN_LAMBDA: false
+LOG_LEVEL: debug
+AUTH0_CLIENT_ID: UTsZdpxN9mCZ3JzwRNTdtYdEzlwD61jF
+AUTH0_DOMAIN: lodocloud.auth0.com
+AUTH0_CLIENT_SECRET: QHzt0wcjj-S0-g0bRFQlMraVpWQUfXoDS1asm1SLeOuigcfeQGmdcb1FgLpup7hL
