@@ -5,7 +5,8 @@
 	"main": "index.js",
 	"scripts": {
 		"start": "cross-env SLS_DEBUG=* AWS_PROFILE=lodo-perm serverless offline start",
-		"invoke-split": "cross-env AWS_PROFILE=lodo-perm serverless invoke local --function splitFile --path s3-sample.json",
+		"invoke:split": "cross-env AWS_PROFILE=lodo-perm serverless invoke local --function splitFile --path s3-sample.json",
+		"invoke:start": "cross-env AWS_PROFILE=lodo-perm serverless invoke local --function start --path s3-sample.json",
 		"serverless:package:dev": "serverless package",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
@@ -21,6 +22,7 @@
 		"cross-env": "^5.2.0",
 		"hummus": "^1.0.95",
 		"hummus-recipe": "^1.8.3",
+		"jest": "^23.6.0",
 		"jszip": "^3.2.0",
 		"serverless": "^1.38.0",
 		"serverless-offline": "^4.8.1",

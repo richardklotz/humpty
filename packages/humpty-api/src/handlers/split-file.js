@@ -5,7 +5,10 @@ import {createThumbnail} from '../utils/create-thumbnail';
 
 export const handler = async (event, context) => {
 	const record = event.Records[0];
-	const userBucket = 'lodo-humpty-api-user-files';
+
+	const s3 = s3Client();
+
+	const userBucket = process.env.USER_BUCKET;
 
 	console.log('EVENT:', JSON.stringify(event, null, '\t'));
 
@@ -15,8 +18,6 @@ export const handler = async (event, context) => {
 	}
 
 	const fileNameKey = record.s3.object.key.split('/').pop();
-
-	const s3 = s3Client();
 
 	const params = {
 		Bucket: decodeURIComponent(record.s3.bucket.name),

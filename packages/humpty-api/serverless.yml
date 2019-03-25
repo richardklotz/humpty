@@ -50,6 +50,8 @@ functions:
     handler: src/handlers/split-file.handler
     layers:
       - { Ref: HummusLambdaLayer }
+    environment:
+      USER_BUCKET: lodo-${self:service}-user-files
   extractText:
     handler: src/handlers/extract-text.handler
   start:

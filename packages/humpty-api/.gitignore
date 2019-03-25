@@ -110,3 +110,4 @@ config/serverless-resources.yaml
 .serverless-uat
 .serverless-prod
 .build
+buckets

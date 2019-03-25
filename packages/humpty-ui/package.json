@@ -9,9 +9,15 @@
 		"start": "cross-env AWS_PROFILE=lodocloud IN_LAMBDA=false NODE_ENV=development API_ENV=local nodemon ./src/server/index.js --exec babel-node --presets @babel/preset-env"
 	},
 	"dependencies": {
+		"@aws-amplify/auth": "^1.2.18",
 		"@material-ui/core": "latest",
+		"@uppy/aws-s3": "^0.30.3",
+		"@uppy/aws-s3-multipart": "^0.30.3",
+		"@uppy/companion": "^0.17.3",
 		"@uppy/core": "^0.30.2",
 		"@uppy/react": "^0.30.2",
+		"aws-amplify": "^1.1.22",
+		"aws-amplify-react": "^2.3.2",
 		"beaver-logger": "^4.0.9",
 		"compression": "^1.7.3",
 		"connect-dynamodb": "^2.0.3",
@@ -39,6 +45,15 @@
 		"redux-observable": "^1.0.0",
 		"rxjs": "^6.4.0",
 		"styled-jsx": "^3.2.1"
+	},
+	"devDependencies": {
+		"aws-sdk": "^2.417.0",
+		"babel-eslint": "^10.0.1",
+		"cross-env": "^5.2.0",
+		"eslint-plugin-jsx-a11y": "^6.2.0",
+		"eslint-plugin-react": "^7.12.4",
+		"nodemon": "^1.18.10",
+		"xo": "^0.24.0"
 	},
 	"author": "",
 	"license": "ISC",
@@ -161,13 +176,5 @@
 			"jsx-a11y/role-supports-aria-props": "warn",
 			"jsx-a11y/scope": "warn"
 		}
-	},
-	"devDependencies": {
-		"aws-sdk": "^2.417.0",
-		"babel-eslint": "^10.0.1",
-		"cross-env": "^5.2.0",
-		"eslint-plugin-jsx-a11y": "^6.2.0",
-		"eslint-plugin-react": "^7.12.4",
-		"xo": "^0.24.0"
 	}
 }
